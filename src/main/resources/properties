@@ -1,0 +1,4 @@
+drv=org.postgresql.Driver
+url=jdbc:postgresql://database-1.ciqib7tg0xqe.us-east-2.rds.amazonaws.com:5432/postgres?currentSchema=ers
+usr=postgres
+psw=TimPgPwFno11%

@@ -12,6 +12,11 @@ public class ReimbursementStatus {
 		this.status = status;
 	}
 	
+	public ReimbursementStatus() {
+		super();
+	}
+
+
 	//getters and setters
 	public int getStatusId() {
 		return statusId;

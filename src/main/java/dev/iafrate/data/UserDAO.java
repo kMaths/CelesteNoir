@@ -4,5 +4,5 @@ import dev.iafrate.model.User;
 
 public interface UserDAO {
 	public User confirmCredentials(String username, String password);
-	public int createUser(User user);
+	public User createUser(User user);
 }

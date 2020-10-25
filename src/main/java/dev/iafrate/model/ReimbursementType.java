@@ -12,6 +12,12 @@ public class ReimbursementType {
 		this.type = type;
 	}
 	
+	
+	public ReimbursementType() {
+		super();
+	}
+
+
 	//getters and setters
 	public int getTypeId() {
 		return typeId;

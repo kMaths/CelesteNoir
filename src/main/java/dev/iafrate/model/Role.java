@@ -12,6 +12,10 @@ public class Role {
 		this.role = role;
 	}
 	
+	public Role() {
+		
+	}
+	
 	//getters and setters
 	public int getRoleId() {
 		return roleId;

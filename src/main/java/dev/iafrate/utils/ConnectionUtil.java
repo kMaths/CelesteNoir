@@ -34,12 +34,15 @@ public class ConnectionUtil {
 	public Connection getConnection() {
 		Connection conn = null;
 		try {
-			// registering the postgresql Driver class
-			Class.forName(properties.getProperty("drv"));
+			String url = System.getenv("url");
+			String password = System.getenv("psw");
+			String username = System.getenv("usr");
+			String drv = System.getenv("drv");
+			Class.forName(drv);
 			conn = DriverManager.getConnection(
-					properties.getProperty("url"),
-					properties.getProperty("usr"),
-					properties.getProperty("psw")
+					url,
+					username,
+					password
 					);
 		} catch (Exception e) {
 			e.printStackTrace();

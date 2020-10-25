@@ -16,12 +16,18 @@ public class UserPostgres implements UserDAO {
 	
 	public UserPostgres(ConnectionUtil cu) {
 		super();
-		this.cu = cu.getConnectionUtil();
+		this.cu = ConnectionUtil.getConnectionUtil();
 	}
+	
+	public UserPostgres() {
+		cu = ConnectionUtil.getConnectionUtil();
+	}
+	
+
 
 	@Override
 	public User confirmCredentials(String username, String password) {
-		String sql = "{select validateUser(?,?)}";
+		String sql = "{call validateUser(?,?)}";
 		User u = null;
 		
 		try(Connection conn = cu.getConnection()){
@@ -38,13 +44,13 @@ public class UserPostgres implements UserDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return u;
 	}
 
 	@Override
-	public int createUser(User user) {
+	public User createUser(User user) {
 		String sql = "insert into ers_users values (default,?,?,?,?,?,?)";
-		String[] keys = {"ers_users_id"};
+		String[] keys = {"ers_users_id","ers_password"};
 		
 		try(Connection conn = cu.getConnection()){
 			PreparedStatement pst = conn.prepareStatement(sql, keys);
@@ -61,21 +67,74 @@ public class UserPostgres implements UserDAO {
 			ResultSet rs = pst.getGeneratedKeys();
 			
 			if(rs.next()) {
-				return rs.getInt(1);
+				user.setUserId(rs.getInt(1));
+				if(rs.next()) {
+					user.setPassword(rs.getString(2));
+				}
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return 0;
-	}
-	
-	public Role getRoleById(int id) {
-		return null;
+		return user;
 	}
 	
 	public Role getRoleByName(String name) {
-		return null;
+		String sql = "select * from ers_user_roles where user_role = ?";
+		Role r= new Role();;
+		
+		try(Connection conn = cu.getConnection()){
+			
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, name);
+			
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) {
+				r.setRole(name);
+				r.setRoleId(rs.getInt(1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
+	public Role getRoleById(int id) {
+		String sql = "select * from ers_user_roles where ers_user_role_id = ?";
+		Role r= new Role();;
+		
+		try(Connection conn = cu.getConnection()){
+			
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) {
+				r.setRoleId(id);
+				r.setRole(rs.getString(2));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
+	public boolean deleteUser(User user) {
+		String sql = "delete from ers_users eu where eu.ers_password = ?;";
+		
+		try(Connection conn = cu.getConnection()){
+			
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, user.getPassword());
+			
+			int rs = pst.executeUpdate();
+			if (rs == 1) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

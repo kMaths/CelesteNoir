@@ -20,4 +20,5 @@ public class DataServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		new RequestForwarder().data(req, resp);
 	}
+	
 }

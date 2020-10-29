@@ -1,28 +1,29 @@
 package dev.iafrate.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Reimbursement {
 	
 	private int reimbursementId;
 	private double amount;
-	private Timestamp submitted;
-	private Timestamp resolved;
+	private Date submitted;
+	private Date resolved;
 	private String description;
 	private String receipt;
 	private User author;
 	private User resolver;
+	
 	private ReimbursementStatus status;
 	private ReimbursementType type;
 	
-	public Reimbursement(int reimbursementId, double amount, Timestamp submitted, Timestamp resolved,
+	public Reimbursement(int reimbursementId, double amount, Date timestamp, Date timestamp2,
 			String description, String receipt, User author, User resolver, ReimbursementStatus status,
 			ReimbursementType type) {
 		super();
 		this.reimbursementId = reimbursementId;
 		this.amount = amount;
-		this.submitted = submitted;
-		this.resolved = resolved;
+		this.submitted = timestamp;
+		this.resolved = timestamp2;
 		this.description = description;
 		this.receipt = receipt;
 		this.author = author;
@@ -32,7 +33,7 @@ public class Reimbursement {
 	}
 
 	//new reimbursement constructor
-	public Reimbursement(int reimbursementId, double amount, Timestamp submitted, String description, User author,
+	public Reimbursement(int reimbursementId, double amount, Date submitted, String description, User author,
 			ReimbursementStatus status, ReimbursementType type) {
 		super();
 		this.reimbursementId = reimbursementId;
@@ -61,19 +62,19 @@ public class Reimbursement {
 		this.amount = amount;
 	}
 
-	public Timestamp getSubmitted() {
+	public Date getSubmitted() {
 		return submitted;
 	}
 
-	public void setSubmitted(Timestamp submitted) {
+	public void setSubmitted(Date submitted) {
 		this.submitted = submitted;
 	}
 
-	public Timestamp getResolved() {
+	public Date getResolved() {
 		return resolved;
 	}
 
-	public void setResolved(Timestamp resolved) {
+	public void setResolved(Date resolved) {
 		this.resolved = resolved;
 	}
 

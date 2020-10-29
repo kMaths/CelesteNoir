@@ -10,10 +10,11 @@ public class User {
 	private String email;
 	private Role role;
 	
+	
 	//constructors
 	public User(int userId, String username, String password, String firstName, String lastName, String email,
 			Role role) {
-		super();
+		this();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;

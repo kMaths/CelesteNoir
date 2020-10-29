@@ -20,8 +20,11 @@ public class ViewServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher(
+		try{req.getRequestDispatcher(
 				new RequestForwarder().routes(req))
 		.forward(req, resp);
+		} catch (Exception e) {
+			resp.sendError(404);
+		}
 	}
 }

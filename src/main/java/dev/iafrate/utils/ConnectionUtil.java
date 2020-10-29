@@ -12,16 +12,7 @@ public class ConnectionUtil {
 	private static Properties properties;
 	
 	private ConnectionUtil() {
-		// use the class loader to get the properties file
-		// then we don't have to rely on the file system
-		properties = new Properties();
-		try {
-			InputStream dbProperties = ConnectionUtil.class.getClassLoader().
-					getResourceAsStream("database.properties");
-			properties.load(dbProperties);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 	}
 	
 	public static synchronized ConnectionUtil getConnectionUtil() {

@@ -22,6 +22,8 @@ public class testDao {
 		ReimbursementStatus rS0 = new ReimbursementStatus(1, "pending");
 		Set<Reimbursement> r2 = rp.getReimbursementsByStatus(rS0);
 		printSet(r2);
+		
+		System.out.println(up.confirmCredentials("kelsey3", "password"));
 
 	}
 	

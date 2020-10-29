@@ -27,8 +27,8 @@ public class ReimbursementPostgres implements ReimbursementDAO {
 
 	@Override
 	public Reimbursement createReimbursement(Reimbursement r) {
-		String sql = "insert into ers_reimbursement (reimb_id , reimb_amount , reimb_submitted , reimb_author , reimb_status_id , reimb_type_id ) values"
-				+ " (default, ?, current_timestamp, ?, 1, 1)";
+		String sql = "insert into ers_reimbursement (reimb_id , reimb_amount , reimb_submitted , reimb_author , reimb_status_id , reimb_type_id , reimb_description) values"
+				+ " (default, ?, current_timestamp, ?, ?, ?, ?)";
 		String[] keys = {"reimb_id"};
 		
 		try(Connection conn = cu.getConnection()){
@@ -36,7 +36,8 @@ public class ReimbursementPostgres implements ReimbursementDAO {
 			pst.setDouble(1, r.getAmount());
 			pst.setInt(2, r.getAuthor().getUserId());
 			pst.setInt(3, r.getStatus().getStatusId());
-			pst.setInt(3, r.getType().getTypeId());
+			pst.setInt(4, r.getType().getTypeId());
+			pst.setString(5, r.getDescription());
 			
 			ResultSet rs = pst.getGeneratedKeys();
 			if(rs.next()) {
@@ -220,8 +221,8 @@ public class ReimbursementPostgres implements ReimbursementDAO {
 		ReimbursementType type = new ReimbursementType(rs.getInt("type_id"), rs.getString("type_name"));
 		User author = new User(rs.getInt("a_id"), rs.getString("a_username"), null, null, null, rs.getString("a_email"), null);
 		User resolver = new User(rs.getInt("m_id"), rs.getString("m_username"), null, null, null, rs.getString("m_email"), null);
-		Reimbursement r = new Reimbursement(rs.getInt("id"), rs.getDouble("amount"), rs.getTimestamp("submitted"), 
-				rs.getTimestamp("resolved"), rs.getString("description"), rs.getString("receipt"), author, resolver, status, type);
+		Reimbursement r = new Reimbursement(rs.getInt("id"), rs.getDouble("amount"), rs.getDate("submitted"), 
+				rs.getDate("resolved"), rs.getString("description"), rs.getString("receipt"), author, resolver, status, type);
 		return r;
 	}
 

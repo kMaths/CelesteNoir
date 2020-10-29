@@ -5,13 +5,16 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import dev.iafrate.controller.ReimbursementDataController;
 import dev.iafrate.controller.SaveController;
 import dev.iafrate.controller.UserController;
 
 public class RequestForwarder {
 	
-	public String routes(HttpServletRequest req) {
+	public String routes(HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
 		switch (req.getRequestURI()){
 		case "/CelesteNoir/login.page":
 			return new UserController().login(req);
@@ -41,7 +44,7 @@ public class RequestForwarder {
 		case "/CelesteNoir/update.json":
 			new ReimbursementDataController().update(req, res);
 		default :
-			new UserController().redirectUser(req, res);
+			new UserController().redirectUser(req);
 		}
 	}
 

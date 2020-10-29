@@ -29,6 +29,12 @@ public class ReimbursementService {
 		ReimbursementStatus status = rd.getStatusByName(statusName);
 		return rd.getReimbursementsByStatus(status);
 	}
+
+	public boolean update(Reimbursement r, User u, String newStatus) {
+		r.setResolver(u);
+		ReimbursementStatus status = rd.getStatusByName(newStatus);
+		return rd.updateReimbursementStatus(r, status);
+	}
 	
 	
 

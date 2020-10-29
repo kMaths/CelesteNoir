@@ -43,6 +43,7 @@ public class RequestForwarder {
 			break;
 		case "/CelesteNoir/update.json":
 			new ReimbursementDataController().update(req, res);
+			break;
 		default :
 			new UserController().redirectUser(req);
 		}

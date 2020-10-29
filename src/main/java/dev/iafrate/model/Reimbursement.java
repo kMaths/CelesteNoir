@@ -44,6 +44,11 @@ public class Reimbursement {
 		this.status = status;
 		this.type = type;
 	}
+	
+
+	public Reimbursement() {
+		super();
+	}
 
 	//getters and setters
 	public int getReimbursementId() {

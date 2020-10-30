@@ -43,8 +43,8 @@ public class UserController {
 	}
 
 	public String logout(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
+		req.getSession().invalidate();
+		return "html/landing.html";
 	}
 
 	public String register(HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {

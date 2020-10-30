@@ -20,7 +20,7 @@ async function addUser(cat) {
           alert("something went wrong")
       });
     
-    cat.preventDefault();
+      cat.preventDefault();
   }
   
   document.getElementById("register").addEventListener("click", addUser);

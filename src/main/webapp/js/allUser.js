@@ -35,34 +35,14 @@ function renderTable(reimbs) {
       resolverTd.innerText = reimb.resolver.username;
       remailTd.innerText = reimb.resolver.email;
       ridTd.innerText = reimb.resolver.userId;
-      
-      if(reimb.status.status == "pending"){
-        const deniedButton = document.createElement("input");
-        deniedButton.type = "button";
-        deniedButton.className = "btn";
-        deniedButton.value = "deny";
-        deniedButton.addEventListener("click",() => update("denied", thisReimb));
-        denyTd.appendChild(deniedButton);
-
-        const acceptButton = document.createElement("input");
-        acceptButton.type = "button";
-        acceptButton.className = "btn";
-        acceptButton.value = "approve";
-        acceptButton.addEventListener("click", ()=> update("approved", thisReimb));
-        acceptTd.appendChild(acceptButton);
-        
-      } else {
-        denyTd.innerHTML="--";
-        acceptTd.innerHTML="--";
-      }
 
       tr.append(reimbIdTd, amountTd, typeTD, subDateTd, statusTd, resolvedDateTd, descriptionTd, 
-        receiptTd, authorTd, aemailTd, aidTd, resolverTd, remailTd, ridTd, denyTd, acceptTd);
+        receiptTd, authorTd, aemailTd, aidTd, resolverTd, remailTd, ridTd);
       document.getElementById("reimbTableBody").append(tr);
     }
   }
 
-  asyncFetch("http://localhost:8080/CelesteNoir/all.json", renderTable)
+  asyncFetch("http://localhost:8080/CelesteNoir/allByUser.json", renderTable)
   
   async function asyncFetch(url, expression) {
     response = await fetch(url);
@@ -70,29 +50,3 @@ function renderTable(reimbs) {
     expression(json);
   }
     
-  function getAll(){
-    const rows = document.getElementById('reimbTableBody').innerHTML='';
-    console.log("test");
-    asyncFetch("http://localhost:8080/CelesteNoir/all.json", renderTable);
-  }
- 
-  function getByStatus(status){
-    const rows = document.getElementById('reimbTableBody').innerHTML='';
-    asyncFetch("http://localhost:8080/CelesteNoir/allByStatus.json?statusName="+status, renderTable);
-  }
-
-  async function update(message, reimb){
-    // message.preventDefault();
-    const update = {
-      reimb: reimb,
-      newStatus: message
-    };
-
-    const json = await fetch("http://localhost:8080/CelesteNoir/update.json", {
-      method: "post", 
-      body : JSON.stringify(update)});
-
-    getAll(json);
-
-  }
-

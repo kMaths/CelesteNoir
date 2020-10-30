@@ -46,6 +46,7 @@ public class RequestForwarder {
 			break;
 		default :
 			new UserController().redirectUser(req);
+			break;
 		}
 	}
 

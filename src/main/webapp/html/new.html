@@ -9,36 +9,78 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
-    <!-- <script src="js/all.js?v=1.0"></script> -->
+    <script defer src="js/new.js"></script>
   </head>
   <body>
-<div class="row">
-    <div class = "col-md-6">
-    <p>Register an account</p>
-    <form #userForm="ngForm" >
-        <div class="form-group ">
-            <label for="username">Username:</label>
-            <input type="username" class="form-control" placeholder="Enter username" id="username " name="username" [(ngModel)]="newUser.username">
-        </div>
-        <div class="form-group">
-          <label for="email">Email address:</label>
-          <input type="email" class="form-control" placeholder="Enter email" id="email" name="email" [(ngModel)]="newUser.email">
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" class="form-control" placeholder="Enter password" id="password" name="password" [(ngModel)]="newUser.password">
-        </div>
-        <div class="form-group">
-            <label for="firstname">First name:</label>
-            <input type="firstname" class="form-control" placeholder="Enter first name" id="firstname" name="firstname" [(ngModel)]="newUser.firstName">
-        </div>
-        <div class="form-group">
-            <label for="lastname">Last name:</label>
-            <input type="lastname" class="form-control" placeholder="Enter last name" id="lastname" name="lastname" [(ngModel)]="newUser.lastName">
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="clickSubmit()">Submit</button>
-      </form>
-    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <p>Submit A Reimbursement</p>
+        <form>
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input
+              type="number"
+              min="0"
+              class="form-control"
+              placeholder="Amount"
+              id="amount"
+              name="amount"
+            />
+          </div>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type" class="form-control" name="type">
+              <option>lodging</option>
+              <option>travel</option>
+              <option>food</option>
+              <option>other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter description"
+              id="description"
+              name="description"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary" onSubmit="addReimb()">
+            Submit
+          </button>
+        </form>
+      </div>
 
+      <div class="col-md-6">
+        
+        <div class="container">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Type</th>
+                <th scope="col">Submit Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Resolved Date</th>
+                <th scope="col">Description</th>
+                <th scope="col">Resolver:</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody id="reimbTableBody"></tbody>
+          </table>
+          <form action="logout.page" method="post">
+            <input
+              type="submit"
+              value="Logout"
+              id="logout"
+              class="btn btn-primary btn-md"
+            />
+          </form>  
+        </div>
+      </div>
     </div>
-    </body>
+  </body>
+</html>

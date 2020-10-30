@@ -27,21 +27,27 @@ public class ReimbursementPostgres implements ReimbursementDAO {
 
 	@Override
 	public Reimbursement createReimbursement(Reimbursement r) {
+//		insert into ers_reimbursement (reimb_id , reimb_amount , reimb_submitted , reimb_author , reimb_status_id , reimb_type_id , reimb_description ) values
+//		(default, 200.0, current_timestamp, 32, 1, 1, 'Bought bread on my adventure to defeat the King of Breland');
 		String sql = "insert into ers_reimbursement (reimb_id , reimb_amount , reimb_submitted , reimb_author , reimb_status_id , reimb_type_id , reimb_description) values"
 				+ " (default, ?, current_timestamp, ?, ?, ?, ?)";
 		String[] keys = {"reimb_id"};
 		
 		try(Connection conn = cu.getConnection()){
+			System.out.println("test");
 			PreparedStatement pst = conn.prepareStatement(sql, keys);
 			pst.setDouble(1, r.getAmount());
 			pst.setInt(2, r.getAuthor().getUserId());
-			pst.setInt(3, r.getStatus().getStatusId());
+			pst.setInt(3, getStatusByName("pending").getStatusId());
 			pst.setInt(4, r.getType().getTypeId());
 			pst.setString(5, r.getDescription());
 			
+			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
 			if(rs.next()) {
 				r.setReimbursementId(rs.getInt(1));
+			} else {
+				System.out.println("failure");
 			}
 			
 			

@@ -4,8 +4,11 @@ import java.util.Set;
 
 import dev.iafrate.data.ReimbursementDAO;
 import dev.iafrate.data.ReimbursementPostgres;
+import dev.iafrate.model.NewReimb;
 import dev.iafrate.model.Reimbursement;
 import dev.iafrate.model.ReimbursementStatus;
+import dev.iafrate.model.ReimbursementType;
+import dev.iafrate.model.UpdateData;
 import dev.iafrate.model.User;
 
 public class ReimbursementService {
@@ -34,6 +37,16 @@ public class ReimbursementService {
 		r.setResolver(u);
 		ReimbursementStatus status = rd.getStatusByName(newStatus);
 		return rd.updateReimbursementStatus(r, status);
+	}
+	public void newReimb(NewReimb r, User u) {
+		Reimbursement reimb = new Reimbursement();
+		reimb.setAmount(r.getAmount());
+		reimb.setDescription(r.getDescription());
+		String type = r.getType();
+		ReimbursementType t = rd.getTypeByName(type);
+		reimb.setType(t);
+		reimb.setAuthor(u);
+		rd.createReimbursement(reimb);
 	}
 	
 	

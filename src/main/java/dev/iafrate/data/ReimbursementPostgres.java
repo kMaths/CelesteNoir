@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,6 +45,7 @@ public class ReimbursementPostgres implements ReimbursementDAO {
 			
 			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
+
 			if(rs.next()) {
 				r.setReimbursementId(rs.getInt(1));
 			} else {
@@ -227,8 +229,18 @@ public class ReimbursementPostgres implements ReimbursementDAO {
 		ReimbursementType type = new ReimbursementType(rs.getInt("type_id"), rs.getString("type_name"));
 		User author = new User(rs.getInt("a_id"), rs.getString("a_username"), null, null, null, rs.getString("a_email"), null);
 		User resolver = new User(rs.getInt("m_id"), rs.getString("m_username"), null, null, null, rs.getString("m_email"), null);
-		Reimbursement r = new Reimbursement(rs.getInt("id"), rs.getDouble("amount"), rs.getDate("submitted"), 
-				rs.getDate("resolved"), rs.getString("description"), rs.getString("receipt"), author, resolver, status, type);
+		Timestamp submitted = rs.getTimestamp("submitted");
+		Timestamp resolved = rs.getTimestamp("resolved");
+		String sub="";
+		String res="";
+		if(submitted != null) {
+			sub = submitted.toLocalDateTime().toString().substring(0, 10);
+		}
+		if(resolved != null) {
+			res = resolved.toLocalDateTime().toString().substring(0, 10);
+		}
+		Reimbursement r = new Reimbursement(rs.getInt("id"), rs.getDouble("amount"), sub, 
+				res, rs.getString("description"), rs.getString("receipt"), author, resolver, status, type);
 		return r;
 	}
 

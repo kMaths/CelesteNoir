@@ -9,9 +9,11 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="css/index.css">
     <script defer src="js/new.js"></script>
   </head>
   <body>
+    <h1 style="text-align: center;">Your Reimbursements</h3>
     <div class="row">
       <div class="col-md-6">
         <p>Submit A Reimbursement</p>
@@ -46,7 +48,7 @@
               name="description"
             />
           </div>
-          <button type="submit" class="btn btn-primary" onSubmit="addReimb()">
+          <button type="submit" class="btn btn-primary" onClick="addReimb()">
             Submit
           </button>
         </form>

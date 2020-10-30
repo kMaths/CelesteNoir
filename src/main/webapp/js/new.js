@@ -1,16 +1,14 @@
 async function addReimb(event) {
-    event.preventDefault();
   const update = {
     amount: document.getElementById("amount").value,
     description: document.getElementById("description").value,
     type : document.getElementById("type").value,
   };
-  const json = await fetch("http://localhost:8080/CelesteNoir/new.json", {
+  await fetch("http://localhost:8080/CelesteNoir/new.json", {
     method: "post",
     body: JSON.stringify(update),
   });
-  const fetched = await json.text();
-  alert(fetched);
+
 }
 
 function renderTable(reimbs) {

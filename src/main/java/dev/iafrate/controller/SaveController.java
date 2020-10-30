@@ -24,7 +24,8 @@ public class SaveController {
 	ObjectMapper om = new ObjectMapper();
 	ReimbursementService rs = new ReimbursementService();
 
-	public void save (HttpServletRequest req, HttpServletResponse res) throws JsonParseException, JsonMappingException, IOException {
+	public void save(HttpServletRequest req, HttpServletResponse res) throws JsonParseException, JsonMappingException, IOException {
+		
 		User u = (User) req.getSession().getAttribute("user");
 		NewReimb r = om.readValue(req.getInputStream(), NewReimb.class);
 		rs.newReimb(r, u);

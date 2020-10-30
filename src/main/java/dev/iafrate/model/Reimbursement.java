@@ -6,8 +6,8 @@ public class Reimbursement {
 	
 	private int reimbursementId;
 	private double amount;
-	private Date submitted;
-	private Date resolved;
+	private String submitted;
+	private String resolved;
 	private String description;
 	private String receipt;
 	private User author;
@@ -16,14 +16,14 @@ public class Reimbursement {
 	private ReimbursementStatus status;
 	private ReimbursementType type;
 	
-	public Reimbursement(int reimbursementId, double amount, Date timestamp, Date timestamp2,
+	public Reimbursement(int reimbursementId, double amount, String submitted, String resolved,
 			String description, String receipt, User author, User resolver, ReimbursementStatus status,
 			ReimbursementType type) {
 		super();
 		this.reimbursementId = reimbursementId;
 		this.amount = amount;
-		this.submitted = timestamp;
-		this.resolved = timestamp2;
+		this.submitted = submitted;
+		this.resolved = resolved;
 		this.description = description;
 		this.receipt = receipt;
 		this.author = author;
@@ -32,28 +32,18 @@ public class Reimbursement {
 		this.type = type;
 	}
 
-	//new reimbursement constructor
-	public Reimbursement(int reimbursementId, double amount, Date submitted, String description, User author,
-			ReimbursementStatus status, ReimbursementType type) {
-		super();
-		this.reimbursementId = reimbursementId;
-		this.amount = amount;
-		this.submitted = submitted;
-		this.description = description;
-		this.author = author;
-		this.status = status;
-		this.type = type;
-	}
-	
-
 	public Reimbursement() {
 		super();
 	}
+
+
 
 	//getters and setters
 	public int getReimbursementId() {
 		return reimbursementId;
 	}
+
+
 
 	public void setReimbursementId(int reimbursementId) {
 		this.reimbursementId = reimbursementId;
@@ -67,19 +57,19 @@ public class Reimbursement {
 		this.amount = amount;
 	}
 
-	public Date getSubmitted() {
+	public String getSubmitted() {
 		return submitted;
 	}
 
-	public void setSubmitted(Date submitted) {
+	public void setSubmitted(String submitted) {
 		this.submitted = submitted;
 	}
 
-	public Date getResolved() {
+	public String getResolved() {
 		return resolved;
 	}
 
-	public void setResolved(Date resolved) {
+	public void setResolved(String resolved) {
 		this.resolved = resolved;
 	}
 

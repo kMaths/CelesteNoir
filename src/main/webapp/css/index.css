@@ -1,0 +1,23 @@
+body {
+    background-image:  url(CelesteNoir.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    background-position: absolute;
+    font-size: large;
+    font-weight: bolder;  
+    text-shadow: -.5px -.5px 0 #faf8f8, .5px -.5px 0 #faf8f8, -.5px .5px 0 #faf8f8, .5px .5px 0 #faf8f8;
+    overflow-x: hidden;
+}
+table, form {
+    background-color: rgba(255,255,255, .75);
+}
+.btn-primary {
+    color: #212529;
+    background-color: #0f949e;
+    border-color: #cc721d
+}
+.btn {
+    font-weight: bolder;
+}

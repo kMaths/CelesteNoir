@@ -1,11 +1,11 @@
-# PROJECT NAME
+# Celest Noir Reimburesment System
 
 ## Project Description
 
-Employees of the Celeste Noir delivery system now have a way to apply for reimbursements for expences accrued while on the job.
-  Employees may make a new account, file for a reimbursements, and see their reimbursement history.
-  Financial managers may review, approve and deny pending reimbursements, as well as see the history of all reimbursements. 
-    To accuire a new financial manager's account, please contact our technical department. 
+Employees of the Celeste Noir delivery system now have a way to apply for reimbursements for expences accrued while on the job.  
+  Employees may make a new account, file for a reimbursements, and see their reimbursement history.  
+  Financial managers may review, approve and deny pending reimbursements, as well as see the history of all reimbursements.   
+    To accuire a new financial manager's account, please contact our technical department.  
 
 ## Technologies Used
 
